@@ -9,6 +9,8 @@
   <script src="https://unpkg.com/react@18.1.0/umd/react.development.js"></script>
   <script src="https://unpkg.com/react-dom@18.1.0/umd/react-dom.development.js"></script>
   -->
+  <script src="https://unpkg.com/react@18.1.0/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@18.1.0/umd/react-dom.development.js"></script>
 
   <script type="module">
     const rootElement = document.getElementById('root')
@@ -16,14 +18,39 @@
     // You're going to re-implement this code using React!
     // 💣 So go ahead and delete this implementation (or comment it out for now)
     // These three lines are similar to React.createElement
-    const element = document.createElement('div')
-    element.textContent = 'Hello World' // 💰 in React, you set this with the "children" prop
-    element.className = 'container' // 💰 in React, this is also called the "className" prop
+    // const element = document.createElement('div')
+    // element.textContent = 'Hello World' // 💰 in React, you set this with the "children" prop
+    // element.className = 'container' // 💰 in React, this is also called the "className" prop
     // This is similar to ReactDOM.createRoot().render()
-    rootElement.append(element)
+    // rootElement.append(element)
+
+
+
+    //SOLUTION to the MAIN EXERCISE:
+    // const reactElement = React.createElement('div', {className: 'container', children: 'Hello World' })
+    // const root = ReactDOM.createRoot(rootElement)
+    // root.render(reactElement)
+
+
 
     // 🐨 Please re-implement the regular document.createElement code above
     // with these React API calls
     // 💰 The example in the markdown file should be a good hint for you.
+
+    // SOLUTION to the EXTRA CREDIT
+
+    // We can pass children as an additional parameter, not as a part of the object: 
+      // React.createElement('div', {className: 'container'}, 'Hello World')
+    // We can add as many params as we want and they will all become children props, converted as an array:
+      // React.createElement('div', {className: 'container'}, 'Hello', '', 'World')
+    // So we can also provide them as an array:
+      // React.createElement('div', {className: 'container', children: ['Hello', '', 'World']})
+    // we get an error that each child in an array needs a key prop, we won't get this error if we do it using multiple params
+
+      const helloElement = React.createElement('span', {}, 'Hello')
+      const worldElement = React.createElement('span', {}, 'World')
+      const reactElement = React.createElement('div', {className: 'container', children: [helloElement, ' ', worldElement]})
+    const root = ReactDOM.createRoot(rootElement)
+    root.render(reactElement)
   </script>
 </body>

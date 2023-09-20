@@ -17,3 +17,50 @@
 <!-- 🐨 Append the div to the root div using `append` -->
 <!--   💰 document.getElementById('root') -->
 <!--   📜 https://developer.mozilla.org/en-US/docs/Web/API/ParentNode/append -->
+
+<!-- 💡💡💡💡💡💡💡💡💡
+    We are creating UI using JS instead of just plain HTML
+    we could for example also do title.textContent = new Date()
+-->
+
+<!--
+    The basic solution:
+-->
+<!-- 
+    <body>
+    <div id="root"></div>
+    <script type="module">
+        const rootNode = document.getElementById('root')
+
+        const title = document.createElement('div')
+        title.textContent = 'Hello World'
+        title.className = 'container'
+
+        // different way of adding class name
+        title.classList.add('title-list')
+
+        rootNode.append(title)
+    </script>
+</body> -->
+
+
+<!--- Extra credit solution
+    Creating the root node using JS instead of HTML
+    This is not a common thing to do, but it's a fun exercise
+-->
+
+<body>
+    <script type="module">
+        const rootNode = document.createElement('div')
+        rootNode.setAttribute('id', 'root')
+        document.body.append(rootNode)
+
+        const title = document.createElement('div')
+        title.textContent = 'Hello World'
+        title.className = 'container'
+
+        rootNode.append(title)
+    </script>
+</body>
+
+
