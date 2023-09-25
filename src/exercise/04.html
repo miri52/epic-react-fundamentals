@@ -6,17 +6,112 @@
   <script src="https://unpkg.com/react@18.1.0/umd/react.development.js"></script>
   <script src="https://unpkg.com/react-dom@18.1.0/umd/react-dom.development.js"></script>
   <script src="https://unpkg.com/@babel/standalone@7.12.4/babel.js"></script>
+  <script src="https://unpkg.com/prop-types@15.7.2/prop-types.js"></script>
+
   <script type="text/babel">
     // 🐨 Make a function called `message` which returns the JSX we want to share
 
+    // function message ({children}) {
+    //   return <div className="message">{children}</div>
+    // } 
+
+    // const message = ({children}) => <div className="message">{children}</div>
+
     // 🐨 use that function in place of the divs below with:
     // 💰 {message({children: 'Hello World'})} {message({children: 'Goodbye World'})}
-    const element = (
-      <div className="container">
-        <div className="message">Hello World</div>
-        <div className="message">Goodbye World</div>
-      </div>
+
+    // BASIC SOLUTION
+    // no element is actually created here, only a div, we can see that when we open React dev tools and check components
+
+    // const element = (
+    //   <div className="container">
+    //     {message({children: 'Hello World'})}
+    //     {message({children: 'Goodbye World'})}
+    //   </div>
+    // )
+
+    // 1 EXTRA CREDIT
+    // an actual React element gets created when using React.createElement
+
+    // const helloElement = React.createElement(message, {children: 'Hello World'})
+    // const goodbyeElement = React.createElement(message, {children: 'Goodbye World'})
+    
+    // const element = (
+    //   <div className="container">
+    //     {helloElement}
+    //     {goodbyeElement}
+    //   </div>
+    // )
+
+    // 2 EXTRA CREDIT
+    // creating an actual custom component 
+    // const Message = ({children}) => <div className="message">{children}</div>
+    
+    // const element = (
+    //   <div className="container">
+    //     <Message>Hello World</Message>
+    //     <Message>Goodbye World</Message>
+    //   </div>
+    // )
+    
+    // 3 EXTRA CREDIT
+    // Runtime Validation with prop types
+    // This kind of validation adds runtime overhead resulting in suboptimal performance, so these validation functions are not run in prod
+    // We get an error in the console for greeting={7}
+    // My error message could be improved :) It could refer to the component and prop
+
+    // PropTypes aren't commonly used in modern React. Use TypeScript for static type checking.
+    // And even if you decide to use it, use the prop-types package instead of writing everything yourself
+
+    // why is it important to define prop types? So that people don't misuse your component
+
+    // const PropTypes = {
+    //   string(props, propName, componentName){
+    //     if (typeof props[propName] !== 'string') {
+    //       return new Error('Not a string')
+    //     }
+    //   }
+    // }
+
+    // const Message = ({subject, greeting}) => <div className="message">{greeting}, {subject}</div>
+
+    // Message.propTypes = {
+    //   subject: PropTypes.string,
+    //   greeting: PropTypes.string
+    // }
+    //   const element = (
+    //   <div className="container">
+    //     <Message greeting={7} subject="World" />
+    //     <Message greeting="Goodbye" subject="World" />
+    //   </div>
+    // )
+
+    // 4 EXTRA CREDIT 
+    // using the prop-types package
+
+    const Message = ({subject, greeting}) => <div className="message">{greeting}, {subject}</div>
+
+    Message.propTypes = {
+      subject: PropTypes.string.isRequired,
+      greeting: PropTypes.string.isRequired
+    }
+    //   const element = (
+    //   <div className="container">
+    //     <Message greeting={7} subject="World" />
+    //     <Message greeting="Goodbye" subject="World" />
+    //   </div>
+    // )
+
+    // 5 USING REACT FRAGMENT
+    // it does not pollute the html structure like a div by creating nesting. Both Messages are direct children of the root element. 
+
+      const element = (
+      <>
+        <Message greeting={7} subject="World" />
+        <Message greeting="Goodbye" subject="World" />
+      </>
     )
+
 
     // 💯 This is only the first step to making actual React components. The rest is in the extra credit!
     ReactDOM.createRoot(document.getElementById('root')).render(element)
